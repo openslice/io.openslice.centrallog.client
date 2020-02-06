@@ -44,22 +44,23 @@ public class CentralLogger {
 	/** the Camel Context configure via Spring. See bean.xml*/	
 	private static CamelContext actx;
 
-	private static String centralloggerurl = null;
+//	private static String centralloggerurl = null;
+//	
+//	public static String getCentralLoggerUrl()
+//	{
+//		return centralloggerurl;
+//	}
+//
+//	public CentralLogger(String centralloggerurl_tmp) {
+//		super();
+//		centralloggerurl = centralloggerurl_tmp;
+//	}
+//
+//	public static void setCentralLoggerUrl(String centralLoggerUrl)
+//	{
+//		centralloggerurl=centralLoggerUrl;
+//	}
 	
-	public static String getCentralLoggerUrl()
-	{
-		return centralloggerurl;
-	}
-
-	public CentralLogger(String centralloggerurl_tmp) {
-		super();
-		centralloggerurl = centralloggerurl_tmp;
-	}
-
-	public static void setCentralLoggerUrl(String centralLoggerUrl)
-	{
-		centralloggerurl=centralLoggerUrl;
-	}	
 	@Autowired
 	public void setActx(CamelContext actx) {
 		CentralLogger.actx = actx;
@@ -95,12 +96,12 @@ public class CentralLogger {
 //	}
 
 	public static void log(CLevel cl, String amessage) {
-		CentralLogPackage clp = new CentralLogPackage();
-		clp.setEndpoint(centralloggerurl);
+//		CentralLogPackage clp = new CentralLogPackage();
+//		clp.setEndpoint(centralloggerurl);
 		CentralLogMessage clm = new CentralLogMessage();
 		clm.setclevel(cl);
 		clm.setMessage(amessage);
-		clp.setCentralLogMessage(clm);
+//		clp.setCentralLogMessage(clm);
 		try {
 			log(clm);
 		} catch (Exception e) {
