@@ -36,6 +36,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  * @author ctranoris
  *
+ *
  */
 @Configuration
 public class CentralLogger {
