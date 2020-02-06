@@ -96,6 +96,7 @@ public class CentralLogger {
 //	}
 
 	public static void log(CLevel cl, String amessage, String component) {
+		
 //		CentralLogPackage clp = new CentralLogPackage();
 //		clp.setEndpoint(centralloggerurl);
 		CentralLogMessage clm = new CentralLogMessage();
