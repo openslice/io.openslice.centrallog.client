@@ -46,7 +46,6 @@ public class CentralLogger {
 	private static CamelContext actx;
 	
 
-	@Autowired
 	private static ProducerTemplate template;
 
 //	private static String centralloggerurl = null;
@@ -69,6 +68,11 @@ public class CentralLogger {
 	@Autowired
 	public void setActx(CamelContext actx) {
 		CentralLogger.actx = actx;
+	}
+	
+	@Autowired
+	public void setTemplate(ProducerTemplate atemplate) {
+		CentralLogger.template = atemplate;
 	}
 	
 	/**
@@ -122,48 +126,47 @@ public class CentralLogger {
 		if ( actx==null) {
 			throw new Exception("actx is null");
 		}
+		if ( template==null) {
+			throw new Exception("template is null");
+		}
 		String json;
-		try {
 			json = new ObjectMapper().writeValueAsString(clm);
 //			FluentProducerTemplate template = actx.createFluentProducerTemplate()
 //					.to("activemq:queue:centrallogger.log");
 			//Future<Exchange> result = template.withBody( json ).asyncSend();
 			//waitAndStopForTemplate( result, template);
 			template.sendBody("activemq:queue:centrallogger.log", json);
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}					
+					
 	}
 	
-//	/**
-//	 * 
-//	 * utility function to stop ProducerTemplate
-//	 * @param result
-//	 * @param template
-//	 */
-//	private static void waitAndStopForTemplate(Future<Exchange> result, FluentProducerTemplate template) {
-//		while (true) {			
-//			if (result.isDone()) {
-//				//logger.info( "waitAndStopForTemplate: " + template.toString() + " [STOPPED]");
-//				try {
-//					template.stop();
-//					template.clearAll();
-//					template.cleanUp();
-//					break;
-//				} catch (Exception e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
-//			
-//			try {
-//				//logger.info( "waitAndStopForTemplate: " + template.toString() + " [WAITING...]");
-//				Thread.sleep( 5000 );
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-//	}	
+	/**
+	 * 
+	 * utility function to stop ProducerTemplate
+	 * @param result
+	 * @param template
+	 */
+	private static void waitAndStopForTemplate(Future<Exchange> result, FluentProducerTemplate template) {
+		while (true) {			
+			if (result.isDone()) {
+				//logger.info( "waitAndStopForTemplate: " + template.toString() + " [STOPPED]");
+				try {
+					template.stop();
+					template.clearAll();
+					template.cleanUp();
+					break;
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			try {
+				//logger.info( "waitAndStopForTemplate: " + template.toString() + " [WAITING...]");
+				Thread.sleep( 5000 );
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}	
 }
