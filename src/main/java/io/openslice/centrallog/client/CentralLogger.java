@@ -37,6 +37,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author ctranoris
  *
  */
+@Configuration
 public class CentralLogger {
 	
 	/** the Camel Context configure via Spring. See bean.xml*/	
@@ -99,11 +100,19 @@ public class CentralLogger {
 		clm.setclevel(cl);
 		clm.setMessage(amessage);
 		clp.setCentralLogMessage(clm);
-		log(clm);
+		try {
+			log(clm);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	public static void log(CentralLogMessage clm)
+	public static void log(CentralLogMessage clm) throws Exception
 	{
+		if ( actx==null) {
+			throw new Exception("actx is null");
+		}
 		String json;
 		try {
 			json = new ObjectMapper().writeValueAsString(clm);
