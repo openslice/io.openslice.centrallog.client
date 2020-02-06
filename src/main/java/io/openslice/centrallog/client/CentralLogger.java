@@ -1,3 +1,4 @@
+package io.openslice.centrallog.client;
 /*-
  * ========================LICENSE_START=================================
  * io.openslice.portal.api

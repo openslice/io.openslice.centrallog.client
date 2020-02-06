@@ -1,3 +1,4 @@
+package io.openslice.centrallog.client;
 
 
 public class CentralLogPackage {
