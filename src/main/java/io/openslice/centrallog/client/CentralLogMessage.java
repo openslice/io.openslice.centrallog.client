@@ -22,6 +22,7 @@ public class CentralLogMessage {
 	public CentralLogMessage() {
 		this.clevel=CLevel.WARN;
 		this.message="This is the default CentralLogger message";
+		this.time = Instant.now().toString();
 	}
 		
 	/**
