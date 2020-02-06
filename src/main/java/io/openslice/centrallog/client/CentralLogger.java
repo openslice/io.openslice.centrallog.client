@@ -95,12 +95,13 @@ public class CentralLogger {
 //		}					
 //	}
 
-	public static void log(CLevel cl, String amessage) {
+	public static void log(CLevel cl, String amessage, String component) {
 //		CentralLogPackage clp = new CentralLogPackage();
 //		clp.setEndpoint(centralloggerurl);
 		CentralLogMessage clm = new CentralLogMessage();
 		clm.setclevel(cl);
 		clm.setMessage(amessage);
+		clm.setComponent(component);
 //		clp.setCentralLogMessage(clm);
 		try {
 			log(clm);

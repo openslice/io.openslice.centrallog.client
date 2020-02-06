@@ -1,13 +1,20 @@
 package io.openslice.centrallog.client;
 
+import java.time.Instant;
 
-
-
+/**
+ * @author ctranoris
+ *
+ */
 public class CentralLogMessage {
 
-	CLevel clevel;
+	private CLevel clevel;
 	
-	String message;
+	private String message;
+	
+	private String time;
+	
+	private String component;
 	
 	/**
 	 * 
@@ -25,6 +32,7 @@ public class CentralLogMessage {
 		super();
 		this.clevel = cLevel;
 		this.message = message;
+		this.time = Instant.now().toString();
 	}
 
 
@@ -54,5 +62,23 @@ public class CentralLogMessage {
 	 */
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	public String getComponent() {
+		return component;
+	}
+
+	public void setComponent(String component) {
+		this.component = component;
 	}		
+	
+	
 }
