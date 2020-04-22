@@ -5,12 +5,12 @@
 	<parent>
 		<groupId>io.openslice</groupId>
 		<artifactId>io.openslice.main</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>1.0.1</version>
 		<relativePath>../io.openslice.main</relativePath>
 	</parent>
 	
   <artifactId>io.openslice.centrallog.client</artifactId>
-  <name>CentralLoggerClient</name>
+  <name>io.openslice.centrallog.client</name>
   
 	<dependencyManagement>
 		<dependencies>
