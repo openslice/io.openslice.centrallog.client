@@ -19,19 +19,16 @@ package io.openslice.centrallog.client;
  * =========================LICENSE_END==================================
  */
 
-import java.io.IOException;
-import java.time.Instant;
-import java.util.HashMap;
 import java.util.concurrent.Future;
 
-import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.FluentProducerTemplate;
 import org.apache.camel.ProducerTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -40,13 +37,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  */
 @Configuration
+@Component
 public class CentralLogger {
 	
 	/** the Camel Context configure via Spring. See bean.xml*/	
-	private static CamelContext actx;
+//	private static CamelContext actx;
 	
 
-	private static ProducerTemplate template;
+	@Autowired
+	private ProducerTemplate template;
 
 //	private static String centralloggerurl = null;
 //	
@@ -65,15 +64,10 @@ public class CentralLogger {
 //		centralloggerurl=centralLoggerUrl;
 //	}
 	
-	@Autowired
-	public void setActx(CamelContext actx) {
-		CentralLogger.actx = actx;
-	}
+//	public void setActx(CamelContext actx) {
+//		CentralLogger.actx = actx;
+//	}
 	
-	@Autowired
-	public void setTemplate(ProducerTemplate atemplate) {
-		CentralLogger.template = atemplate;
-	}
 	
 	/**
 	 * @param cl
@@ -104,7 +98,7 @@ public class CentralLogger {
 //		}					
 //	}
 
-	public static void log(CLevel cl, String amessage, String component) {
+	public void log(CLevel cl, String amessage, String component) {
 		
 //		CentralLogPackage clp = new CentralLogPackage();
 //		clp.setEndpoint(centralloggerurl);
@@ -121,11 +115,11 @@ public class CentralLogger {
 		}
 	}
 	
-	public static void log(CentralLogMessage clm) throws Exception
+	public void log(CentralLogMessage clm) throws Exception
 	{
-		if ( actx==null) {
-			throw new Exception("actx is null");
-		}
+//		if ( actx==null) {
+//			throw new Exception("actx is null");
+//		}
 		if ( template==null) {
 			throw new Exception("template is null");
 		}
@@ -145,7 +139,7 @@ public class CentralLogger {
 	 * @param result
 	 * @param template
 	 */
-	private static void waitAndStopForTemplate(Future<Exchange> result, FluentProducerTemplate template) {
+	private void waitAndStopForTemplate(Future<Exchange> result, FluentProducerTemplate template) {
 		while (true) {			
 			if (result.isDone()) {
 				//logger.info( "waitAndStopForTemplate: " + template.toString() + " [STOPPED]");
