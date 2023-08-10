@@ -145,7 +145,7 @@ public class CentralLogger {
 				//logger.info( "waitAndStopForTemplate: " + template.toString() + " [STOPPED]");
 				try {
 					template.stop();
-					template.clearAll();
+					//template.clearAll();
 					template.cleanUp();
 					break;
 				} catch (Exception e) {
